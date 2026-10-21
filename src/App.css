@@ -36,14 +36,10 @@
 }
 
 .site-header {
-  position: absolute;
+  position: fixed;
   inset: 0.75rem 0 auto;
   z-index: 5;
   background: transparent;
-}
-
-.site-header--scrolled {
-  position: fixed;
 }
 
 .header-inner,
@@ -65,6 +61,21 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 14px 36px rgba(0, 0, 0, 0.24);
   -webkit-backdrop-filter: blur(20px) saturate(125%);
   backdrop-filter: blur(20px) saturate(125%);
+  transition:
+    width 240ms ease,
+    min-height 240ms ease,
+    padding 240ms ease,
+    border-radius 240ms ease,
+    background-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.site-header--scrolled .header-inner {
+  width: min(calc(100% - 2rem), 760px);
+  min-height: 70px;
+  padding-inline: 1.25rem;
+  border-radius: 17px;
+  background-color: rgba(12, 12, 12, 0.64);
 }
 
 .wordmark {
@@ -402,15 +413,38 @@ main {
     border-radius: 16px;
   }
 
+  .site-header--scrolled .header-inner {
+    width: min(calc(100% - 1rem), 560px);
+    min-height: 62px;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 14px;
+  }
+
+  .site-header--scrolled .wordmark {
+    font-size: 0.82rem;
+  }
+
   .main-nav {
     width: 100%;
     justify-content: space-between;
     gap: 0.3rem;
   }
 
+  .site-header--scrolled .main-nav {
+    width: auto;
+    gap: 0.1rem;
+  }
+
   .nav-link {
     padding-block: 0.6rem;
     font-size: 0.73rem;
+  }
+
+  .site-header--scrolled .nav-link {
+    padding-block: 0.35rem;
+    font-size: 0.62rem;
   }
 
   .hero {
