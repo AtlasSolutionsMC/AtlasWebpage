@@ -76,6 +76,7 @@
   padding-inline: 1.25rem;
   border-radius: 17px;
   background-color: rgba(12, 12, 12, 0.64);
+  box-shadow: none;
 }
 
 .wordmark {
