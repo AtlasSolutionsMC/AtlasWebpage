@@ -7,7 +7,8 @@ import { useEffect, useRef } from 'react'
  * https://creativecommons.org/licenses/by-nc-sa/4.0/
  *
  * Changes: Shadertoy uniforms and output ported to Canvas 2D, color mapped
- * to monochrome, ray-march steps reduced for a lightweight page background.
+ * to monochrome, and resolution, ray-march steps, and frame rate reduced for
+ * a lightweight page background.
  */
 export function ShaderBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -20,9 +21,8 @@ export function ShaderBackground() {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     let width = 1
     let height = 1
-    let animationFrame = 0
+    let animationTimeout = 0
     let startTime = 0
-    let previousFrame = 0
 
     const draw = (seconds: number) => {
       const frame = context.createImageData(width, height)
@@ -43,7 +43,7 @@ export function ShaderBackground() {
           let originZ = rayZ + seconds * 4
           let i = 0
 
-          for (; i < 9; i += 0.06) {
+          for (; i < 9; i += 0.15) {
             const cosineZ = Math.cos(pointZ)
             const surface = cosineZ - Math.abs(Math.sin(pointX * 0.7 + cosineZ))
             pointY += 1
@@ -82,38 +82,30 @@ export function ShaderBackground() {
     const resize = () => {
       const viewportWidth = window.innerWidth
       const viewportHeight = window.innerHeight
-      width = Math.max(120, Math.min(300, Math.round(viewportWidth * 0.25)))
+      width = Math.max(96, Math.min(180, Math.round(viewportWidth * 0.12)))
       height = Math.max(90, Math.round(width * (viewportHeight / viewportWidth)))
       canvas.width = width
       canvas.height = height
       draw(0)
     }
 
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp
-      if (timestamp - previousFrame >= 1000 / 6) {
-        previousFrame = timestamp
-        draw(reducedMotion.matches ? 0 : (timestamp - startTime) / 1000)
-      }
-
-      if (!reducedMotion.matches && !document.hidden) {
-        animationFrame = requestAnimationFrame(animate)
-      }
+    const animate = () => {
+      draw((performance.now() - startTime) / 1000)
+      animationTimeout = window.setTimeout(animate, 250)
     }
 
     const startAnimation = () => {
-      cancelAnimationFrame(animationFrame)
-      if (reducedMotion.matches) {
+      window.clearTimeout(animationTimeout)
+      if (reducedMotion.matches || document.hidden) {
         draw(0)
         return
       }
-      startTime = 0
-      previousFrame = 0
-      animationFrame = requestAnimationFrame(animate)
+      startTime = performance.now()
+      animationTimeout = window.setTimeout(animate, 250)
     }
 
     const handleVisibilityChange = () => {
-      if (document.hidden) cancelAnimationFrame(animationFrame)
+      if (document.hidden) window.clearTimeout(animationTimeout)
       else startAnimation()
     }
 
@@ -124,7 +116,7 @@ export function ShaderBackground() {
     startAnimation()
 
     return () => {
-      cancelAnimationFrame(animationFrame)
+      window.clearTimeout(animationTimeout)
       window.removeEventListener('resize', resize)
       reducedMotion.removeEventListener('change', startAnimation)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
