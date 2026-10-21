@@ -257,6 +257,13 @@
   fill: #080808;
 }
 
+.terminal-window__angle-strokes {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.72);
+  stroke-width: 1.35;
+  stroke-linecap: round;
+}
+
 .terminal-window__house {
   width: 18px;
   height: 18px;
