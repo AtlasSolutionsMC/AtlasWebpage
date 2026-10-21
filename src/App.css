@@ -221,7 +221,6 @@
   display: flex;
   align-items: flex-end;
   padding: 7px 5px 0;
-  border-bottom: 1px solid #45484a;
   background: #080808;
 }
 
@@ -272,6 +271,24 @@
   margin-left: -3px;
   padding: 2px 13px 0 12px;
   color: #eee;
+}
+
+.terminal-window__rest {
+  min-width: 37px;
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  align-self: stretch;
+}
+
+.terminal-window__rest::after {
+  height: 1px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #45484a;
+  content: '';
 }
 
 .terminal-window__favicon {
@@ -345,6 +362,7 @@
   width: 34px;
   height: 18px;
   margin: 0 0 3px 3px;
+  z-index: 1;
 }
 
 .terminal-window__new-tab .terminal-window__tab-shape {

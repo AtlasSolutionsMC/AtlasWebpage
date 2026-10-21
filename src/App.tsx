@@ -42,9 +42,11 @@ function TerminalPreview() {
             <span className="terminal-window__tab-title">2. 192.168.1.109 (alphacomputer)</span>
             <span className="terminal-window__close" />
           </span>
-          <span className="terminal-window__new-tab" aria-hidden="true">
-            <svg className="terminal-window__tab-shape" viewBox="0 0 34 18" preserveAspectRatio="none"><path d="M2 1 H24 Q27 1 28 4 L33 16 H9 Q6 16 5 13 L1 3 Q0 1 2 1 Z" /></svg>
-            <span className="terminal-window__plus" />
+          <span className="terminal-window__rest">
+            <span className="terminal-window__new-tab" aria-hidden="true">
+              <svg className="terminal-window__tab-shape" viewBox="0 0 34 18" preserveAspectRatio="none"><path d="M2 1 H24 Q27 1 28 4 L33 16 H9 Q6 16 5 13 L1 3 Q0 1 2 1 Z" /></svg>
+              <span className="terminal-window__plus" />
+            </span>
           </span>
         </div>
         <div className="terminal-window__body" aria-hidden="true">
