@@ -298,8 +298,12 @@ main {
   grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
   align-items: center;
   gap: clamp(3rem, 8vw, 9rem);
-  padding-block: clamp(5.5rem, 9vw, 8.5rem);
-  border-top: 1px solid var(--line);
+  padding: clamp(2rem, 4vw, 4rem);
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 24px;
+  background-color: rgba(12, 12, 12, 0.56);
+  -webkit-backdrop-filter: blur(8px) saturate(115%);
+  backdrop-filter: blur(8px) saturate(115%);
 }
 
 .dashboard-heading .section-kicker {
@@ -320,8 +324,10 @@ main {
 }
 
 .dashboard-window {
-  border: 1px solid var(--line-strong);
-  background: var(--panel);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.24);
 }
 
 .dashboard-window__bar {
@@ -496,6 +502,7 @@ main {
   .dashboard-section {
     grid-template-columns: 1fr;
     gap: 3rem;
+    padding: 1.5rem;
   }
 
   .dashboard-window .empty-state {
