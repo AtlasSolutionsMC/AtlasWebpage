@@ -30,8 +30,17 @@ function TerminalPreview() {
     <div className="terminal-stage">
       <div className="terminal-window" role="img" aria-label="Simulated Atlas Anticheat terminal output">
         <div className="terminal-window__bar">
-          <span className="terminal-window__tab">ATLAS CONSOLE</span>
-          <span className="terminal-window__mode">SIMULATED OUTPUT</span>
+          <span className="terminal-window__home" aria-hidden="true">
+            <span className="terminal-window__house" />
+          </span>
+          <span className="terminal-window__tab" aria-hidden="true">
+            <span className="terminal-window__favicon">
+              <span className="terminal-window__key" />
+            </span>
+            <span className="terminal-window__tab-title">2. 192.168.1.109 (alphacomputer)</span>
+            <span className="terminal-window__close" />
+          </span>
+          <span className="terminal-window__new-tab" aria-hidden="true" />
         </div>
         <div className="terminal-window__body" aria-hidden="true">
           <div className="terminal-window__logs">
