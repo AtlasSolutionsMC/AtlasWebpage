@@ -20,12 +20,18 @@ function EmptyState({ message }: { message: string }) {
 
 function App() {
   const [headerHidden, setHeaderHidden] = useState(false)
+  const [headerMoving, setHeaderMoving] = useState(false)
 
   useEffect(() => {
     let previousScrollY = window.scrollY
     let frame = 0
+    let settleTimer: number | undefined
 
     const handleScroll = () => {
+      setHeaderMoving(true)
+      window.clearTimeout(settleTimer)
+      settleTimer = window.setTimeout(() => setHeaderMoving(false), 260)
+
       if (frame) return
 
       frame = window.requestAnimationFrame(() => {
@@ -46,6 +52,7 @@ function App() {
     return () => {
       window.removeEventListener('scroll', handleScroll)
       if (frame) window.cancelAnimationFrame(frame)
+      window.clearTimeout(settleTimer)
     }
   }, [])
 
@@ -53,7 +60,7 @@ function App() {
     <>
       <a className="skip-link" href="#main">Skip to content</a>
 
-      <header className={`site-header${headerHidden ? ' site-header--hidden' : ''}`}>
+      <header className={`site-header${headerHidden ? ' site-header--hidden' : ''}${headerMoving ? ' site-header--scrolling' : ''}`}>
         <div className="header-inner">
           <a className="wordmark" href="#home" aria-label="Atlas Anticheat home">ATLAS</a>
           <nav className="main-nav" aria-label="Main navigation">

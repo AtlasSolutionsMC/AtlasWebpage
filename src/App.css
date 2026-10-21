@@ -40,7 +40,11 @@
   inset: 0 0 auto;
   z-index: 5;
   background: transparent;
-  transition: transform 220ms ease;
+  transition: transform 220ms ease, background-color 180ms ease;
+}
+
+.site-header--scrolling {
+  background-color: var(--ink);
 }
 
 .site-header--hidden {
