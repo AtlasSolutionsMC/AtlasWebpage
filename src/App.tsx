@@ -19,40 +19,25 @@ function EmptyState({ message }: { message: string }) {
 }
 
 function App() {
-  const [headerHidden, setHeaderHidden] = useState(false)
-  const [headerMoving, setHeaderMoving] = useState(false)
+  const [headerScrolled, setHeaderScrolled] = useState(() => window.scrollY > 40)
 
   useEffect(() => {
-    let previousScrollY = window.scrollY
     let frame = 0
-    let settleTimer: number | undefined
 
     const handleScroll = () => {
-      setHeaderMoving(true)
-      window.clearTimeout(settleTimer)
-      settleTimer = window.setTimeout(() => setHeaderMoving(false), 260)
-
       if (frame) return
 
       frame = window.requestAnimationFrame(() => {
-        const currentScrollY = window.scrollY
-
-        if (currentScrollY < 40 || currentScrollY < previousScrollY - 4) {
-          setHeaderHidden(false)
-        } else if (currentScrollY > previousScrollY + 4) {
-          setHeaderHidden(true)
-        }
-
-        previousScrollY = currentScrollY
+        setHeaderScrolled(window.scrollY > 40)
         frame = 0
       })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
     return () => {
       window.removeEventListener('scroll', handleScroll)
       if (frame) window.cancelAnimationFrame(frame)
-      window.clearTimeout(settleTimer)
     }
   }, [])
 
@@ -60,7 +45,7 @@ function App() {
     <>
       <a className="skip-link" href="#main">Skip to content</a>
 
-      <header className={`site-header${headerHidden ? ' site-header--hidden' : ''}${headerMoving ? ' site-header--scrolling' : ''}`}>
+      <header className={`site-header${headerScrolled ? ' site-header--scrolled' : ''}`}>
         <div className="header-inner">
           <a className="wordmark" href="#home" aria-label="Atlas Anticheat home">ATLAS</a>
           <nav className="main-nav" aria-label="Main navigation">
