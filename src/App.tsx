@@ -66,7 +66,7 @@ function App() {
               </p>
               <div className="hero-actions">
                 <a className="button button--primary" href="#features">Explore Features</a>
-                <a className="button button--quiet" href="#dashbord">View Dashbord</a>
+                <a className="button button--quiet button--dashboard" href="#dashbord">View Dashbord</a>
               </div>
             </div>
           </div>

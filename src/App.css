@@ -107,9 +107,8 @@
   color: var(--paper);
 }
 
-.nav-link--dashboard {
-  font-weight: 750;
-  padding-inline: 0.8rem;
+.nav-link--dashboard,
+.button--dashboard {
   border: 1px solid rgba(255, 255, 255, 0.17);
   border-radius: 10px;
   background-image: linear-gradient(
@@ -118,6 +117,11 @@
     rgba(255, 255, 255, 0.045) 52%,
     rgba(255, 255, 255, 0.11) 100%
   );
+}
+
+.nav-link--dashboard {
+  font-weight: 750;
+  padding-inline: 0.8rem;
 }
 
 .hero {
