@@ -6,86 +6,131 @@ import { useEffect, useRef } from 'react'
  * Licensed under CC BY-NC-SA 4.0:
  * https://creativecommons.org/licenses/by-nc-sa/4.0/
  *
- * Changes: Shadertoy uniforms and output ported to Canvas 2D, color mapped
- * to monochrome, and resolution, ray-march steps, and frame rate reduced for
- * a lightweight page background.
+ * Changes: Shadertoy uniforms and output ported to WebGL, color mapped to
+ * monochrome, and ray-march steps reduced. The drawing buffer uses the full
+ * viewport resolution multiplied by the device pixel ratio.
  */
 export function ShaderBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
-    const context = canvas?.getContext('2d', { alpha: false })
-    if (!canvas || !context) return
+    const gl = canvas?.getContext('webgl', {
+      alpha: false,
+      antialias: false,
+      depth: false,
+      powerPreference: 'high-performance',
+      stencil: false,
+    })
+    if (!canvas || !gl) return
+
+    const vertexSource = `
+      attribute vec2 aPosition;
+      void main() {
+        gl_Position = vec4(aPosition, 0.0, 1.0);
+      }
+    `
+
+    const precision = gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.HIGH_FLOAT)
+    const fragmentSource = `
+      ${precision?.precision ? 'precision highp float;' : 'precision mediump float;'}
+      uniform vec2 uResolution;
+      uniform float uTime;
+
+      void main() {
+        vec3 d = vec3(gl_FragCoord.xy / uResolution - 0.5, 0.5);
+        vec3 p = vec3(0.0);
+        vec3 o = d;
+        o.z += uTime * 4.0;
+
+        float i = 0.0;
+        for (int step = 0; step < 60; step++) {
+          float surface = cos(p.z) - abs(sin(p.x * 0.7 + cos(p.z)));
+          p.y += 1.0;
+          if (i >= 9.0 || !(surface < p.y)) break;
+
+          p = (o += d * i * 0.05) * 0.3;
+          i += 0.15;
+        }
+
+        float mixAmount = i / 9.0;
+        vec3 color = mix((3.0 + p.y) * vec3(0.6, 0.3, 0.0), d, mixAmount);
+        float luminance = dot(color, vec3(0.2126, 0.7152, 0.0722));
+        gl_FragColor = vec4(vec3(clamp(luminance, 0.0, 1.0)), 1.0);
+      }
+    `
+
+    const compileShader = (type: number, source: string) => {
+      const shader = gl.createShader(type)
+      if (!shader) return null
+
+      gl.shaderSource(shader, source)
+      gl.compileShader(shader)
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        gl.deleteShader(shader)
+        return null
+      }
+
+      return shader
+    }
+
+    const vertexShader = compileShader(gl.VERTEX_SHADER, vertexSource)
+    const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentSource)
+    if (!vertexShader || !fragmentShader) {
+      if (vertexShader) gl.deleteShader(vertexShader)
+      if (fragmentShader) gl.deleteShader(fragmentShader)
+      return
+    }
+
+    const program = gl.createProgram()
+    if (!program) {
+      gl.deleteShader(vertexShader)
+      gl.deleteShader(fragmentShader)
+      return
+    }
+
+    gl.attachShader(program, vertexShader)
+    gl.attachShader(program, fragmentShader)
+    gl.linkProgram(program)
+    gl.deleteShader(vertexShader)
+    gl.deleteShader(fragmentShader)
+
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      gl.deleteProgram(program)
+      return
+    }
+
+    const positionLocation = gl.getAttribLocation(program, 'aPosition')
+    const resolutionLocation = gl.getUniformLocation(program, 'uResolution')
+    const timeLocation = gl.getUniformLocation(program, 'uTime')
+    const buffer = gl.createBuffer()
+    if (positionLocation < 0 || !resolutionLocation || !timeLocation || !buffer) {
+      gl.deleteBuffer(buffer)
+      gl.deleteProgram(program)
+      return
+    }
+
+    gl.useProgram(program)
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW)
+    gl.enableVertexAttribArray(positionLocation)
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0)
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    let width = 1
-    let height = 1
     let animationTimeout = 0
     let startTime = 0
 
     const draw = (seconds: number) => {
-      const frame = context.createImageData(width, height)
-      const pixels = frame.data
-      let pixel = 0
-
-      for (let y = 0; y < height; y += 1) {
-        const rayY = (height - y - 0.5) / height - 0.5
-
-        for (let x = 0; x < width; x += 1) {
-          const rayX = (x + 0.5) / width - 0.5
-          const rayZ = 0.5
-          let pointX = 0
-          let pointY = 0
-          let pointZ = 0
-          let originX = rayX
-          let originY = rayY
-          let originZ = rayZ + seconds * 4
-          let i = 0
-
-          for (; i < 9; i += 0.15) {
-            const cosineZ = Math.cos(pointZ)
-            const surface = cosineZ - Math.abs(Math.sin(pointX * 0.7 + cosineZ))
-            pointY += 1
-            if (!(surface < pointY)) break
-
-            originX += rayX * i * 0.05
-            originY += rayY * i * 0.05
-            originZ += rayZ * i * 0.05
-            pointX = originX * 0.3
-            pointY = originY * 0.3
-            pointZ = originZ * 0.3
-          }
-
-          const mixAmount = i / 9
-          const duneR = (3 + pointY) * 0.6
-          const duneG = (3 + pointY) * 0.3
-          const red = duneR * (1 - mixAmount) + rayX * mixAmount
-          const green = duneG * (1 - mixAmount) + rayY * mixAmount
-          const blue = rayZ * mixAmount
-          const luminance = Math.max(
-            0,
-            Math.min(255, (red * 0.2126 + green * 0.7152 + blue * 0.0722) * 255),
-          )
-
-          pixels[pixel] = luminance
-          pixels[pixel + 1] = luminance
-          pixels[pixel + 2] = luminance
-          pixels[pixel + 3] = 255
-          pixel += 4
-        }
-      }
-
-      context.putImageData(frame, 0, 0)
+      gl.viewport(0, 0, canvas.width, canvas.height)
+      gl.uniform2f(resolutionLocation, canvas.width, canvas.height)
+      gl.uniform1f(timeLocation, seconds)
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
     }
 
     const resize = () => {
-      const viewportWidth = window.innerWidth
-      const viewportHeight = window.innerHeight
-      width = Math.max(96, Math.min(180, Math.round(viewportWidth * 0.12)))
-      height = Math.max(90, Math.round(width * (viewportHeight / viewportWidth)))
-      canvas.width = width
-      canvas.height = height
+      const pixelRatio = window.devicePixelRatio || 1
+      canvas.width = Math.max(1, Math.round(window.innerWidth * pixelRatio))
+      canvas.height = Math.max(1, Math.round(window.innerHeight * pixelRatio))
       draw(0)
     }
 
@@ -120,6 +165,8 @@ export function ShaderBackground() {
       window.removeEventListener('resize', resize)
       reducedMotion.removeEventListener('change', startAnimation)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
+      gl.deleteBuffer(buffer)
+      gl.deleteProgram(program)
     }
   }, [])
 
