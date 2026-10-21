@@ -220,7 +220,7 @@
   gap: 0;
   padding-inline: 0.55rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: #151515;
+  background: #080808;
 }
 
 .terminal-window__home {
@@ -233,14 +233,14 @@
   place-items: center;
   margin-bottom: 0.35rem;
   border-radius: 9px 9px 3px 3px;
-  background: #393939;
+  background: #080808;
 }
 
 .terminal-window__home::before {
   width: 10px;
   position: absolute;
   inset: 0 0 0 auto;
-  background: #151515;
+  background: #080808;
   clip-path: polygon(0 0, 100% 0, 100% 100%);
   content: '';
 }
@@ -290,7 +290,7 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-bottom: 0;
   border-radius: 9px 9px 0 0;
-  background: #292929;
+  background: #080808;
   color: var(--paper);
 }
 
@@ -376,7 +376,7 @@
   margin-left: 0.12rem;
   border: 1px solid rgba(255, 255, 255, 0.26);
   border-radius: 8px;
-  background: #292929;
+  background: #080808;
 }
 
 .terminal-window__new-tab::before,
