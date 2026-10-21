@@ -30,24 +30,10 @@ function TerminalPreview() {
     <div className="terminal-stage">
       <div className="terminal-window" role="img" aria-label="Simulated Atlas Anticheat terminal output">
         <div className="terminal-window__bar">
-          <span>ATLAS CONSOLE</span>
+          <span className="terminal-window__tab">ATLAS CONSOLE</span>
           <span className="terminal-window__mode">SIMULATED OUTPUT</span>
         </div>
         <div className="terminal-window__body" aria-hidden="true">
-          <div className="terminal-system-stats">
-            <p className="terminal-system-stats__row">
-              <span>Usage of /:</span>
-              <span>78.8% of 250 GB</span>
-            </p>
-            <p className="terminal-system-stats__row">
-              <span>Memory usage:</span>
-              <span>67%</span>
-            </p>
-            <p className="terminal-system-stats__row">
-              <span>Swap usage:</span>
-              <span>60%</span>
-            </p>
-          </div>
           <div className="terminal-window__logs">
             {terminalLines.map((line) => (
               <p className="terminal-line" key={`${line.time}-${line.scope}-${line.message}`}>

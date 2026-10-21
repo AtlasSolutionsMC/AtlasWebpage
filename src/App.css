@@ -214,14 +214,14 @@
 }
 
 .terminal-window__bar {
-  min-height: 50px;
+  min-height: 52px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  padding-inline: 1rem;
+  padding-inline: 0.65rem 0.9rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.035);
+  background: #111111;
   color: var(--paper-dim);
   font-family: var(--mono);
   font-size: 0.68rem;
@@ -229,10 +229,20 @@
   letter-spacing: 0.055em;
 }
 
+.terminal-window__tab {
+  min-height: 41px;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  background: #1b1b1b;
+  color: var(--paper);
+}
+
 .terminal-window__mode {
-  padding: 0.25rem 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
+  margin-bottom: 0.72rem;
   color: var(--muted);
   font-size: 0.56rem;
   letter-spacing: 0.035em;
@@ -241,31 +251,6 @@
 .terminal-window__body {
   padding: 1.25rem clamp(1rem, 2vw, 1.7rem) 1.15rem;
   background: rgba(0, 0, 0, 0.9);
-}
-
-.terminal-system-stats {
-  width: min(100%, 29rem);
-  display: grid;
-  gap: 0.42rem;
-  margin-bottom: 1.15rem;
-  padding-bottom: 1.15rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-  color: var(--paper);
-  font-family: var(--mono);
-  font-size: clamp(0.68rem, 0.85vw, 0.85rem);
-  line-height: 1.5;
-}
-
-.terminal-system-stats__row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) max-content;
-  gap: 1rem;
-  margin: 0;
-}
-
-.terminal-system-stats__row span:last-child {
-  color: #f3f3f3;
-  white-space: nowrap;
 }
 
 .terminal-window__logs {
