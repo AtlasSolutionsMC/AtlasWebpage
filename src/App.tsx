@@ -1,4 +1,5 @@
 import './App.css'
+import { ShaderBackground } from './ShaderBackground'
 
 const navigation = [
   { label: 'Home', href: '#home' },
@@ -19,6 +20,7 @@ function EmptyState({ message }: { message: string }) {
 function App() {
   return (
     <>
+      <ShaderBackground />
       <a className="skip-link" href="#main">Skip to content</a>
 
       <header className="site-header">
@@ -105,7 +107,13 @@ function App() {
 
       <footer className="site-footer page-wrap">
         <a className="wordmark wordmark--footer" href="#home" aria-label="Atlas Anticheat home">ATLAS</a>
-        <span>Atlas Anticheat</span>
+        <div className="footer-meta">
+          <span>Atlas Anticheat</span>
+          <small>
+            Background: <a href="https://www.shadertoy.com/view/MtlGWM" target="_blank" rel="noreferrer">2TC 15 Psychedelic Sand Dunes by Reinder Nijhoff (2015)</a>.
+            Monochrome Canvas 2D adaptation with reduced ray-march steps under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noreferrer">CC BY-NC-SA 4.0</a>.
+          </small>
+        </div>
         <a href="#home">Back to top</a>
       </footer>
     </>
