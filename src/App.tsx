@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import './App.css'
 import { ShaderBackground } from './ShaderBackground'
 
@@ -18,11 +19,41 @@ function EmptyState({ message }: { message: string }) {
 }
 
 function App() {
+  const [headerHidden, setHeaderHidden] = useState(false)
+
+  useEffect(() => {
+    let previousScrollY = window.scrollY
+    let frame = 0
+
+    const handleScroll = () => {
+      if (frame) return
+
+      frame = window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY
+
+        if (currentScrollY < 40 || currentScrollY < previousScrollY - 4) {
+          setHeaderHidden(false)
+        } else if (currentScrollY > previousScrollY + 4) {
+          setHeaderHidden(true)
+        }
+
+        previousScrollY = currentScrollY
+        frame = 0
+      })
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
+  }, [])
+
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
 
-      <header className="site-header">
+      <header className={`site-header${headerHidden ? ' site-header--hidden' : ''}`}>
         <div className="header-inner">
           <a className="wordmark" href="#home" aria-label="Atlas Anticheat home">ATLAS</a>
           <nav className="main-nav" aria-label="Main navigation">
