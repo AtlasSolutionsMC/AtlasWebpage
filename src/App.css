@@ -243,6 +243,31 @@
   background: rgba(0, 0, 0, 0.9);
 }
 
+.terminal-system-stats {
+  width: min(100%, 29rem);
+  display: grid;
+  gap: 0.42rem;
+  margin-bottom: 1.15rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: clamp(0.68rem, 0.85vw, 0.85rem);
+  line-height: 1.5;
+}
+
+.terminal-system-stats__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 1rem;
+  margin: 0;
+}
+
+.terminal-system-stats__row span:last-child {
+  color: #f3f3f3;
+  white-space: nowrap;
+}
+
 .terminal-window__logs {
   display: grid;
   gap: 0.52rem;
