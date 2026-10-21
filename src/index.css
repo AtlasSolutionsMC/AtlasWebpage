@@ -36,7 +36,7 @@
 html {
   min-width: 320px;
   scroll-padding-top: 1rem;
-  scrollbar-color: #777777 #141414;
+  scrollbar-color: rgba(235, 235, 235, 0.42) rgba(255, 255, 255, 0.035);
   scrollbar-width: thin;
 }
 
@@ -45,24 +45,54 @@ html::-webkit-scrollbar {
   height: 9px;
 }
 
-html::-webkit-scrollbar-button {
-  display: none;
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:vertical:decrement,
+::-webkit-scrollbar-button:vertical:increment,
+::-webkit-scrollbar-button:horizontal:decrement,
+::-webkit-scrollbar-button:horizontal:increment {
+  display: none !important;
   width: 0;
   height: 0;
+  border: 0;
+  background: transparent;
 }
 
 html::-webkit-scrollbar-track {
-  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.065),
+    rgba(255, 255, 255, 0.02)
+  );
+  -webkit-backdrop-filter: blur(5px) saturate(125%);
+  backdrop-filter: blur(5px) saturate(125%);
 }
 
 html::-webkit-scrollbar-thumb {
-  border: 1px solid #141414;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 999px;
-  background: #777777;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.34),
+    rgba(255, 255, 255, 0.15)
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.48),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+    0 1px 4px rgba(0, 0, 0, 0.28);
+  -webkit-backdrop-filter: blur(6px) saturate(135%);
+  backdrop-filter: blur(6px) saturate(135%);
 }
 
 html::-webkit-scrollbar-thumb:hover {
-  background: #b9b9b9;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.46),
+    rgba(255, 255, 255, 0.23)
+  );
 }
 
 h1[id],
