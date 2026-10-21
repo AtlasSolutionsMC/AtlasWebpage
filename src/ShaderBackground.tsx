@@ -91,7 +91,7 @@ export function ShaderBackground() {
 
     const animate = () => {
       draw((performance.now() - startTime) / 1000)
-      animationTimeout = window.setTimeout(animate, 1000 / 12)
+      animationTimeout = window.setTimeout(animate, 1000 / 24)
     }
 
     const startAnimation = () => {
@@ -101,7 +101,7 @@ export function ShaderBackground() {
         return
       }
       startTime = performance.now()
-      animationTimeout = window.setTimeout(animate, 1000 / 12)
+      animationTimeout = window.setTimeout(animate, 1000 / 24)
     }
 
     const handleVisibilityChange = () => {
