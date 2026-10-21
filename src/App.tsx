@@ -35,7 +35,7 @@ function TerminalPreview() {
             <svg className="terminal-window__house" viewBox="0 0 18 18"><path fill="#e6e6e6" d="M3 8h12v9H3z" /><path fill="#ec735d" d="m1 8 8-7 8 7-2 2-6-6-6 6z" /><path fill="#64bddc" d="M7 11h4v6H7zM4 8h3v3H4z" /><path fill="#ddd" d="M12 1h2v5l-2-2z" /></svg>
           </span>
           <span className="terminal-window__tab" aria-hidden="true">
-            <svg className="terminal-window__tab-shape" viewBox="0 0 250 25" preserveAspectRatio="none"><path d="M1 24 L9 5 Q11 1 15 1 H232 Q236 1 238 5 L249 24 Z" /></svg>
+            <svg className="terminal-window__tab-shape" viewBox="0 0 250 25" preserveAspectRatio="none"><path d="M1 24 L9 5 Q11 1 15 1 H232 Q236 1 238 5 L249 24" /></svg>
             <span className="terminal-window__favicon">
               <span className="terminal-window__key" />
             </span>
