@@ -1,5 +1,15 @@
+import { useState } from 'react'
 import './App.css'
 import { ShaderBackground } from './ShaderBackground'
+
+const fontPresets = [
+  { id: 'syne', name: 'Syne / DM Sans', sampleFont: "'Syne', sans-serif" },
+  { id: 'space-grotesk', name: 'Space Grotesk', sampleFont: "'Space Grotesk', sans-serif" },
+  { id: 'manrope', name: 'Manrope', sampleFont: "'Manrope', sans-serif" },
+  { id: 'oxanium', name: 'Oxanium / DM Sans', sampleFont: "'Oxanium', sans-serif" },
+] as const
+
+type FontPreset = (typeof fontPresets)[number]['id']
 
 const navigation = [
   { label: 'Home', href: '#home' },
@@ -17,9 +27,41 @@ function EmptyState({ message }: { message: string }) {
   )
 }
 
-function App() {
+function FontTester({
+  selected,
+  onSelect,
+}: {
+  selected: FontPreset
+  onSelect: (font: FontPreset) => void
+}) {
   return (
-    <>
+    <details className="font-tester">
+      <summary>Font test</summary>
+      <div className="font-tester__panel">
+        <p className="font-tester__title">Choose a typeface</p>
+        {fontPresets.map((font) => (
+          <button
+            aria-pressed={selected === font.id}
+            className="font-tester__option"
+            key={font.id}
+            onClick={() => onSelect(font.id)}
+            style={{ fontFamily: font.sampleFont }}
+            type="button"
+          >
+            <span className="font-tester__name">{font.name}</span>
+            <span className="font-tester__sample">Clearer play starts here.</span>
+          </button>
+        ))}
+      </div>
+    </details>
+  )
+}
+
+function App() {
+  const [fontChoice, setFontChoice] = useState<FontPreset>('space-grotesk')
+
+  return (
+    <div className="app-shell" data-font={fontChoice}>
       <a className="skip-link" href="#main">Skip to content</a>
 
       <header className="site-header">
@@ -36,6 +78,7 @@ function App() {
               </a>
             ))}
           </nav>
+          <FontTester selected={fontChoice} onSelect={setFontChoice} />
         </div>
       </header>
 
@@ -118,7 +161,7 @@ function App() {
         </div>
         <a href="#home">Back to top</a>
       </footer>
-    </>
+    </div>
   )
 }
 

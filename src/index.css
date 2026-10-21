@@ -27,6 +27,32 @@
   scroll-behavior: smooth;
 }
 
+.app-shell {
+  --body-font: 'DM Sans', 'Avenir Next', system-ui, sans-serif;
+  min-height: 100vh;
+  font-family: var(--body-font);
+}
+
+.app-shell[data-font='syne'] {
+  --display: 'Syne', 'Avenir Next', system-ui, sans-serif;
+  --body-font: 'DM Sans', 'Avenir Next', system-ui, sans-serif;
+}
+
+.app-shell[data-font='space-grotesk'] {
+  --display: 'Space Grotesk', 'Avenir Next', system-ui, sans-serif;
+  --body-font: 'Space Grotesk', 'Avenir Next', system-ui, sans-serif;
+}
+
+.app-shell[data-font='manrope'] {
+  --display: 'Manrope', 'Avenir Next', system-ui, sans-serif;
+  --body-font: 'Manrope', 'Avenir Next', system-ui, sans-serif;
+}
+
+.app-shell[data-font='oxanium'] {
+  --display: 'Oxanium', 'Avenir Next', system-ui, sans-serif;
+  --body-font: 'DM Sans', 'Avenir Next', system-ui, sans-serif;
+}
+
 *,
 *::before,
 *::after {
