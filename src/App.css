@@ -36,8 +36,8 @@
 }
 
 .site-header {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  inset: 0 0 auto;
   z-index: 5;
   background: transparent;
   transition: transform 220ms ease;
@@ -95,7 +95,7 @@
 }
 
 .hero {
-  min-height: min(780px, calc(100svh - 92px));
+  min-height: min(872px, 100svh);
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -107,7 +107,7 @@
 .hero-inner {
   position: relative;
   display: flex;
-  min-height: min(780px, calc(100svh - 92px));
+  min-height: min(872px, 100svh);
   align-items: center;
 }
 
