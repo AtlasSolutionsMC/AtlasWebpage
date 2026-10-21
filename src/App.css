@@ -44,7 +44,7 @@
 }
 
 .site-header--scrolling {
-  background-color: var(--ink);
+  background-color: transparent;
 }
 
 .site-header--hidden {
@@ -64,6 +64,25 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
+  border: 1px solid transparent;
+  transition:
+    width 180ms ease,
+    min-height 180ms ease,
+    margin 180ms ease,
+    padding 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    border-radius 180ms ease;
+}
+
+.site-header--scrolling .header-inner {
+  width: min(calc(100% - 2rem), 760px);
+  min-height: 72px;
+  margin-top: 0.55rem;
+  padding-inline: 1.25rem;
+  border-color: var(--line-strong);
+  border-radius: 16px;
+  background-color: var(--ink);
 }
 
 .wordmark {
@@ -397,6 +416,14 @@ main {
     flex-wrap: wrap;
     gap: 0.65rem 1rem;
     padding-block: 1rem;
+  }
+
+  .site-header--scrolling .header-inner {
+    width: min(calc(100% - 1rem), 560px);
+    min-height: 78px;
+    margin-top: 0.45rem;
+    padding-inline: 0.75rem;
+    border-radius: 14px;
   }
 
   .main-nav {
