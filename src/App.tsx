@@ -40,17 +40,19 @@ function App() {
       </header>
 
       <main id="main">
-        <section className="hero page-wrap" id="home" aria-labelledby="hero-title">
+        <section className="hero" id="home" aria-labelledby="hero-title">
           <ShaderBackground />
-          <div className="hero-copy">
-            <p className="hero-kicker">A new home for Atlas Anticheat</p>
-            <h1 id="hero-title">Clearer play<br />starts here.</h1>
-            <p className="hero-intro">
-              Atlas Anticheat for Minecraft. Product details, updates and access will take shape here.
-            </p>
-            <div className="hero-actions">
-              <a className="button button--primary" href="#features">Explore Features</a>
-              <a className="button button--quiet" href="#dashbord">View Dashbord</a>
+          <div className="hero-inner page-wrap">
+            <div className="hero-copy">
+              <p className="hero-kicker">A new home for Atlas Anticheat</p>
+              <h1 id="hero-title">Clearer play<br />starts here.</h1>
+              <p className="hero-intro">
+                Atlas Anticheat for Minecraft. Product details, updates and access will take shape here.
+              </p>
+              <div className="hero-actions">
+                <a className="button button--primary" href="#features">Explore Features</a>
+                <a className="button button--quiet" href="#dashbord">View Dashbord</a>
+              </div>
             </div>
           </div>
           <a className="scroll-cue" href="#features">Scroll to explore</a>
