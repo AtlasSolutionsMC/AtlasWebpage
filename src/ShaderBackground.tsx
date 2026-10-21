@@ -7,8 +7,8 @@ import { useEffect, useRef } from 'react'
  * https://creativecommons.org/licenses/by-nc-sa/4.0/
  *
  * Changes: Shadertoy uniforms and output ported to WebGL, color mapped to
- * monochrome, and ray-march steps reduced. The drawing buffer uses the full
- * viewport resolution multiplied by the device pixel ratio.
+ * monochrome, and animation capped at 24 fps. The drawing buffer uses the
+ * full viewport resolution multiplied by the device pixel ratio.
  */
 export function ShaderBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -44,13 +44,14 @@ export function ShaderBackground() {
         o.z += uTime * 4.0;
 
         float i = 0.0;
-        for (int step = 0; step < 60; step++) {
+        for (int step = 0; step < 900; step++) {
+          if (i >= 9.0) break;
           float surface = cos(p.z) - abs(sin(p.x * 0.7 + cos(p.z)));
           p.y += 1.0;
-          if (i >= 9.0 || !(surface < p.y)) break;
+          if (!(surface < p.y)) break;
 
           p = (o += d * i * 0.05) * 0.3;
-          i += 0.15;
+          i += 0.01;
         }
 
         float mixAmount = i / 9.0;

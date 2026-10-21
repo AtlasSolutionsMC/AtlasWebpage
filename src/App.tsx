@@ -111,7 +111,7 @@ function App() {
           <span>Atlas Anticheat</span>
           <small>
             Background: <a href="https://www.shadertoy.com/view/MtlGWM" target="_blank" rel="noreferrer">2TC 15 Psychedelic Sand Dunes by Reinder Nijhoff (2015)</a>.
-            Monochrome WebGL adaptation with reduced ray-march steps under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noreferrer">CC BY-NC-SA 4.0</a>.
+            Monochrome WebGL adaptation under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noreferrer">CC BY-NC-SA 4.0</a>.
           </small>
         </div>
         <a href="#home">Back to top</a>
