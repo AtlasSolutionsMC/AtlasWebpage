@@ -221,6 +221,7 @@
   display: flex;
   align-items: flex-end;
   padding: 7px 5px 0;
+  border-bottom: 1px solid #45484a;
   background: #080808;
 }
 
@@ -255,13 +256,6 @@
 
 .terminal-window__home .terminal-window__tab-shape {
   fill: #080808;
-}
-
-.terminal-window__angle-strokes {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.72);
-  stroke-width: 1.35;
-  stroke-linecap: round;
 }
 
 .terminal-window__house {

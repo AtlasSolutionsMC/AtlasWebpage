@@ -35,7 +35,7 @@ function TerminalPreview() {
             <svg className="terminal-window__house" viewBox="0 0 18 18"><path fill="#e6e6e6" d="M3 8h12v9H3z" /><path fill="#ec735d" d="m1 8 8-7 8 7-2 2-6-6-6 6z" /><path fill="#64bddc" d="M7 11h4v6H7zM4 8h3v3H4z" /><path fill="#ddd" d="M12 1h2v5l-2-2z" /></svg>
           </span>
           <span className="terminal-window__tab" aria-hidden="true">
-            <svg className="terminal-window__tab-shape" viewBox="0 0 250 25" preserveAspectRatio="none"><path d="M1 24 L9 5 Q11 1 15 1 H232 Q236 1 238 5 L249 24" /><path className="terminal-window__angle-strokes" d="M1 24 L9 5 M238 5 L249 24" /></svg>
+            <svg className="terminal-window__tab-shape" viewBox="0 0 250 25" preserveAspectRatio="none"><path d="M1 24 L9 5 Q11 1 15 1 H232 Q236 1 238 5 L249 24" /></svg>
             <span className="terminal-window__favicon">
               <span className="terminal-window__key" />
             </span>
@@ -43,7 +43,7 @@ function TerminalPreview() {
             <span className="terminal-window__close" />
           </span>
           <span className="terminal-window__new-tab" aria-hidden="true">
-            <svg className="terminal-window__tab-shape" viewBox="0 0 34 18" preserveAspectRatio="none"><path d="M2 1 H24 Q27 1 28 4 L33 16 H9 Q6 16 5 13 L1 3 Q0 1 2 1 Z" /><path className="terminal-window__angle-strokes" d="M28 4 L33 16 M5 13 L9 16" /></svg>
+            <svg className="terminal-window__tab-shape" viewBox="0 0 34 18" preserveAspectRatio="none"><path d="M2 1 H24 Q27 1 28 4 L33 16 H9 Q6 16 5 13 L1 3 Q0 1 2 1 Z" /></svg>
             <span className="terminal-window__plus" />
           </span>
         </div>
