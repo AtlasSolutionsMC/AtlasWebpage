@@ -1,6 +1,6 @@
 :root {
   color-scheme: dark;
-  font-family: 'Segoe UI Variable', 'Avenir Next', system-ui, sans-serif;
+  font-family: 'DM Sans', 'Avenir Next', system-ui, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -8,16 +8,17 @@
   font-optical-sizing: auto;
   font-weight: 400;
 
-  --ink: #0b100d;
-  --panel: #111813;
-  --paper: #edf0e4;
-  --paper-dim: #aeb8a8;
-  --muted: #828c7e;
-  --line: #273129;
-  --line-strong: #3d4b3e;
-  --grid: #29362d;
-  --grid-bright: #536450;
-  --signal: #c7e771;
+  --ink: #090909;
+  --panel: #111111;
+  --paper: #f3f3f3;
+  --paper-dim: #b9b9b9;
+  --muted: #929292;
+  --line: #292929;
+  --line-strong: #494949;
+  --grid: #252525;
+  --grid-bright: #6d6d6d;
+  --signal: #f3f3f3;
+  --display: 'Syne', 'Avenir Next', system-ui, sans-serif;
   --mono: 'Cascadia Mono', 'SFMono-Regular', Consolas, monospace;
 
   color: var(--paper);
@@ -54,7 +55,7 @@ body {
 body,
 button,
 a {
-  -webkit-tap-highlight-color: rgba(199, 231, 113, 0.18);
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0.16);
 }
 
 a:focus-visible {

@@ -45,10 +45,10 @@ const fragmentShaderSource = `
     float tick = step(0.54, fract(uv.x * 19.0 + iTime * 0.025));
     float sweep = 1.0 - step(0.004, abs(p.y - sin(p.x * 4.4 + iTime * 0.13) * 0.19));
 
-    vec3 color = vec3(11.0, 16.0, 13.0) / 255.0;
-    if (contour < 0.018) color = vec3(42.0, 60.0, 47.0) / 255.0;
-    if (bar * tick > 0.5) color = vec3(67.0, 85.0, 62.0) / 255.0;
-    if (sweep > 0.5 && mod(cell, 4.0) < 1.0) color = vec3(199.0, 231.0, 113.0) / 255.0;
+    vec3 color = vec3(11.0) / 255.0;
+    if (contour < 0.018) color = vec3(48.0) / 255.0;
+    if (bar * tick > 0.5) color = vec3(82.0) / 255.0;
+    if (sweep > 0.5 && mod(cell, 4.0) < 1.0) color = vec3(228.0) / 255.0;
 
     gl_FragColor = vec4(color, 1.0);
   }
