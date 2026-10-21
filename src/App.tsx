@@ -20,7 +20,6 @@ function EmptyState({ message }: { message: string }) {
 function App() {
   return (
     <>
-      <ShaderBackground />
       <a className="skip-link" href="#main">Skip to content</a>
 
       <header className="site-header">
@@ -42,6 +41,7 @@ function App() {
 
       <main id="main">
         <section className="hero page-wrap" id="home" aria-labelledby="hero-title">
+          <ShaderBackground />
           <div className="hero-copy">
             <p className="hero-kicker">A new home for Atlas Anticheat</p>
             <h1 id="hero-title">Clearer play<br />starts here.</h1>

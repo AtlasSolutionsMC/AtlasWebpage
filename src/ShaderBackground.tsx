@@ -130,8 +130,8 @@ export function ShaderBackground() {
 
     const resize = () => {
       const pixelRatio = window.devicePixelRatio || 1
-      canvas.width = Math.max(1, Math.round(window.innerWidth * pixelRatio))
-      canvas.height = Math.max(1, Math.round(window.innerHeight * pixelRatio))
+      canvas.width = Math.max(1, Math.round(canvas.clientWidth * pixelRatio))
+      canvas.height = Math.max(1, Math.round(canvas.clientHeight * pixelRatio))
       draw(0)
     }
 
@@ -156,6 +156,8 @@ export function ShaderBackground() {
     }
 
     resize()
+    const resizeObserver = new ResizeObserver(resize)
+    resizeObserver.observe(canvas.parentElement ?? canvas)
     window.addEventListener('resize', resize)
     reducedMotion.addEventListener('change', startAnimation)
     document.addEventListener('visibilitychange', handleVisibilityChange)
@@ -163,6 +165,7 @@ export function ShaderBackground() {
 
     return () => {
       window.clearTimeout(animationTimeout)
+      resizeObserver.disconnect()
       window.removeEventListener('resize', resize)
       reducedMotion.removeEventListener('change', startAnimation)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
