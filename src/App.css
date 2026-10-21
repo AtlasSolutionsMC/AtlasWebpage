@@ -109,6 +109,10 @@
 
 .nav-link--dashboard {
   font-weight: 750;
+  padding-inline: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.06);
 }
 
 .hero {
@@ -452,6 +456,10 @@ main {
   .site-header--scrolled .nav-link {
     padding-block: 0.35rem;
     font-size: 0.62rem;
+  }
+
+  .site-header--scrolled .nav-link--dashboard {
+    padding-inline: 0.45rem;
   }
 
   .hero {
