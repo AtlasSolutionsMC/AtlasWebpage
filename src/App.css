@@ -36,13 +36,14 @@
 }
 
 .site-header {
-  position: fixed;
+  position: absolute;
   inset: 0 0 auto;
   z-index: 5;
   background: transparent;
 }
 
 .site-header--scrolled {
+  position: fixed;
   background-color: transparent;
 }
 

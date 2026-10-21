@@ -19,26 +19,18 @@ function EmptyState({ message }: { message: string }) {
 }
 
 function App() {
-  const [headerScrolled, setHeaderScrolled] = useState(() => window.scrollY > 40)
+  const [headerScrolled, setHeaderScrolled] = useState(false)
 
   useEffect(() => {
-    let frame = 0
+    const landing = document.getElementById('home')
+    if (!landing) return
 
-    const handleScroll = () => {
-      if (frame) return
+    const observer = new IntersectionObserver(([entry]) => {
+      setHeaderScrolled(entry.boundingClientRect.bottom <= 0)
+    })
 
-      frame = window.requestAnimationFrame(() => {
-        setHeaderScrolled(window.scrollY > 40)
-        frame = 0
-      })
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      if (frame) window.cancelAnimationFrame(frame)
-    }
+    observer.observe(landing)
+    return () => observer.disconnect()
   }, [])
 
   return (
