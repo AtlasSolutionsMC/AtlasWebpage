@@ -136,9 +136,11 @@
 
 .hero-inner {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
   min-height: min(872px, 100svh);
   align-items: center;
+  gap: clamp(2rem, 4.5vw, 4.5rem);
 }
 
 .hero-copy {
@@ -166,11 +168,141 @@
   margin: 0;
   color: var(--paper);
   font-family: var(--display);
-  font-size: clamp(4rem, 9vw, 8.5rem);
+  font-size: clamp(3.5rem, 5.1vw, 6.2rem);
   font-weight: 560;
   letter-spacing: -0.075em;
   line-height: 0.98;
   text-wrap: balance;
+}
+
+.hero-terminal {
+  width: min(100%, 760px);
+  min-width: 0;
+  justify-self: end;
+  perspective: 1500px;
+  perspective-origin: 72% 50%;
+}
+
+.terminal-stage {
+  position: relative;
+  transform: rotateY(-13deg) rotateX(1.5deg);
+  transform-style: preserve-3d;
+  transform-origin: 56% 50%;
+}
+
+.terminal-stage::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0.8rem -0.65rem -0.8rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 17px;
+  background: linear-gradient(145deg, #191919, #080808 68%);
+  box-shadow: -18px 28px 54px rgba(0, 0, 0, 0.38);
+  content: '';
+  transform: translate3d(-12px, 10px, -28px);
+}
+
+.terminal-window {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  background: #080808;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.11),
+    0 22px 55px rgba(0, 0, 0, 0.4);
+}
+
+.terminal-window__bar {
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-inline: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--paper-dim);
+  font-family: var(--mono);
+  font-size: 0.61rem;
+  letter-spacing: 0.055em;
+}
+
+.terminal-window__mode {
+  padding: 0.22rem 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.5rem;
+  letter-spacing: 0.035em;
+}
+
+.terminal-window__body {
+  padding: 1.05rem clamp(0.85rem, 1.55vw, 1.4rem) 1rem;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.terminal-window__logs {
+  display: grid;
+  gap: 0.48rem;
+}
+
+.terminal-line {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.32rem;
+  margin: 0;
+  overflow: hidden;
+  color: var(--paper-dim);
+  font-family: var(--mono);
+  font-size: clamp(0.55rem, 0.67vw, 0.67rem);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.terminal-line__time,
+.terminal-line__scope {
+  flex: 0 0 auto;
+  color: #858585;
+}
+
+.terminal-line__level {
+  flex: 0 0 2.8em;
+  color: #e2e2e2;
+}
+
+.terminal-line__level--warn {
+  color: #b9b9b9;
+}
+
+.terminal-line__message {
+  min-width: 0;
+  overflow: hidden;
+  color: #e7e7e7;
+  text-overflow: ellipsis;
+}
+
+.terminal-window__prompt {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+}
+
+.terminal-window__prompt span:first-child {
+  color: var(--paper-dim);
+}
+
+.terminal-window__cursor {
+  width: 0.42rem;
+  height: 0.72rem;
+  background: var(--paper-dim);
+  opacity: 0.8;
 }
 
 .hero-intro {
@@ -417,8 +549,28 @@ main {
 }
 
 @media (max-width: 900px) {
+  .hero {
+    min-height: 0;
+    padding-block: 7rem 6rem;
+  }
+
+  .hero-inner {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+
   .hero-copy {
     transform: translateX(-0.75rem);
+  }
+
+  .hero-terminal {
+    width: min(100%, 760px);
+    justify-self: end;
+  }
+
+  .terminal-stage {
+    transform: rotateY(-10deg) rotateX(1deg);
   }
 
   .dashboard-section {
@@ -487,15 +639,24 @@ main {
 
   .hero-inner {
     min-height: 0;
+    gap: 1.75rem;
   }
 
   .hero h1 {
-    font-size: clamp(3.7rem, 14vw, 6.4rem);
+    font-size: clamp(2.5rem, 11vw, 5rem);
   }
 
   .hero-copy {
     transform: translateX(-0.5rem);
-    padding-bottom: 0;
+    padding: clamp(1.3rem, 4vw, 1.75rem);
+  }
+
+  .hero-terminal {
+    width: calc(100% - 0.5rem);
+  }
+
+  .terminal-stage {
+    transform: rotateY(-6deg) rotateX(0.5deg);
   }
 
   .scroll-cue {

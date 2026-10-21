@@ -10,6 +10,53 @@ const navigation = [
   { label: 'Dashbord', href: '#dashbord', dashboard: true },
 ]
 
+const terminalLines = [
+  { time: '01:08:41', level: 'INFO', scope: 'Atlas', message: 'Boot sequence started' },
+  { time: '01:08:41', level: 'INFO', scope: 'Platform', message: 'Paper 1.21.11 detected' },
+  { time: '01:08:41', level: 'INFO', scope: 'Config', message: 'Configuration loaded' },
+  { time: '01:08:42', level: 'INFO', scope: 'Network', message: 'Packet pipeline ready' },
+  { time: '01:08:42', level: 'INFO', scope: 'Checks', message: '12 detection modules loaded' },
+  { time: '01:08:42', level: 'INFO', scope: 'Movement', message: 'Movement checks enabled' },
+  { time: '01:08:42', level: 'INFO', scope: 'Combat', message: 'Combat checks enabled' },
+  { time: '01:08:43', level: 'INFO', scope: 'Storage', message: 'Profile cache initialized' },
+  { time: '01:09:02', level: 'INFO', scope: 'Session', message: 'SamplePlayer connected' },
+  { time: '01:09:05', level: 'WARN', scope: 'Movement', message: 'Unusual acceleration sample' },
+  { time: '01:09:05', level: 'INFO', scope: 'Review', message: 'Evidence attached to alert' },
+  { time: '01:09:06', level: 'INFO', scope: 'Atlas', message: 'Protection status: active' },
+]
+
+function TerminalPreview() {
+  return (
+    <div className="terminal-stage">
+      <div className="terminal-window" role="img" aria-label="Simulated Atlas Anticheat terminal output">
+        <div className="terminal-window__bar">
+          <span>ATLAS CONSOLE</span>
+          <span className="terminal-window__mode">SIMULATED OUTPUT</span>
+        </div>
+        <div className="terminal-window__body" aria-hidden="true">
+          <div className="terminal-window__logs">
+            {terminalLines.map((line) => (
+              <p className="terminal-line" key={`${line.time}-${line.scope}-${line.message}`}>
+                <span className="terminal-line__time">[{line.time}</span>
+                <span className={`terminal-line__level${line.level === 'WARN' ? ' terminal-line__level--warn' : ''}`}>
+                  {line.level}
+                </span>
+                <span className="terminal-line__scope">[{line.scope}]</span>
+                <span className="terminal-line__message">{line.message}</span>
+              </p>
+            ))}
+          </div>
+          <div className="terminal-window__prompt">
+            <span>atlas@server:~$</span>
+            <span>status</span>
+            <span className="terminal-window__cursor" />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function EmptyState({ message }: { message: string }) {
   return (
     <div className="empty-state">
@@ -68,6 +115,9 @@ function App() {
                 <a className="button button--primary" href="#features">Explore Features</a>
                 <a className="button button--quiet button--dashboard" href="#dashbord">View Dashbord</a>
               </div>
+            </div>
+            <div className="hero-terminal">
+              <TerminalPreview />
             </div>
           </div>
           <a className="scroll-cue" href="#features">Scroll to explore</a>
