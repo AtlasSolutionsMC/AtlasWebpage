@@ -36,6 +36,27 @@
 html {
   min-width: 320px;
   scroll-padding-top: 1rem;
+  scrollbar-color: #5b5b5b #111111;
+  scrollbar-width: thin;
+}
+
+html::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #111111;
+}
+
+html::-webkit-scrollbar-thumb {
+  border: 2px solid #111111;
+  border-radius: 999px;
+  background: #5b5b5b;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #858585;
 }
 
 h1[id],
