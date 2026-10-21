@@ -141,6 +141,7 @@
   position: relative;
   z-index: 1;
   max-width: 850px;
+  transform: translateX(-20%);
   padding: clamp(1.5rem, 4vw, 3rem);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 24px;
@@ -411,6 +412,10 @@ main {
 }
 
 @media (max-width: 900px) {
+  .hero-copy {
+    transform: translateX(-0.75rem);
+  }
+
   .dashboard-section {
     grid-template-columns: minmax(180px, 0.65fr) minmax(0, 1.35fr);
     gap: 3rem;
@@ -484,6 +489,7 @@ main {
   }
 
   .hero-copy {
+    transform: translateX(-0.5rem);
     padding-bottom: 0;
   }
 
